@@ -41,12 +41,12 @@ public class Movie {
     }
 
     public PlaySchedule checkSchedue(int scheduleId, List<ScheduleMovie> books) {
-        if(playSchedules.size() < scheduleId){
+        if (playSchedules.size() < scheduleId) {
             throw new IllegalArgumentException("해당 영화가 없습니다.");
         }
 
-        for(ScheduleMovie book : books){
-            if(book.checkTime(playSchedules.get(scheduleId).getStarTime())){
+        for (ScheduleMovie book : books) {
+            if (book.checkTime(playSchedules.get(scheduleId).getStarTime())) {
                 throw new IllegalArgumentException("1시간 이내 입니다.");
             }
         }
@@ -55,7 +55,7 @@ public class Movie {
 
     }
 
-    public int getPrice(){
+    public int getPrice() {
         return price;
     }
 

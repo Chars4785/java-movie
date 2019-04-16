@@ -31,7 +31,7 @@ public class PlaySchedule {
 
     }
 
-    public LocalDateTime getStarTime(){
+    public LocalDateTime getStarTime() {
         return startDateTime;
     }
 }

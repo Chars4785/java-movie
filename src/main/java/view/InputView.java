@@ -50,7 +50,7 @@ public class InputView {
         throw new IllegalArgumentException("잘못 입력하셨습니다.");
     }
 
-    public static int inputPoint(){
+    public static int inputPoint() {
         try {
             System.out.println("## 결제를 진행합니다.");
             System.out.println("## 포인트 사용 금액을 입력하세요. 포인트가 없으면 0 입력");
@@ -61,7 +61,7 @@ public class InputView {
         }
     }
 
-    public static int inputWay(){
+    public static int inputWay() {
         try {
             System.out.println("## 신용카드는 1번, 현금은 2번 ");
             return checkNumber();

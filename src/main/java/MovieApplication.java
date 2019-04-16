@@ -14,14 +14,14 @@ public class MovieApplication {
     static private PlaySchedule schedule;
 
     public static void main(String[] args) {
-        do{
+        do {
             List<Movie> movies = MovieRepository.getMovies();
             OutputView.printMovies(movies);
             Movie movie = check(movies);
             OutputView.printEachMovie(movie);
             schedule = askSchedule(movie);
             people = askPerson(schedule);
-            books.add(new ScheduleMovie(movie,schedule,people));
+            books.add(new ScheduleMovie(movie, schedule, people));
         } while (askAgain());
         System.out.print(askWay(askPoint()));
     }
@@ -36,9 +36,9 @@ public class MovieApplication {
         }
     }
 
-    public static Movie findMovie(List<Movie> movies,int movieId){
-        for(Movie movie: movies){
-            if(movie.movieMatchOf(movieId)){
+    public static Movie findMovie(List<Movie> movies, int movieId) {
+        for (Movie movie : movies) {
+            if (movie.movieMatchOf(movieId)) {
                 return movie;
             }
         }
@@ -46,81 +46,81 @@ public class MovieApplication {
     }
 
     public static PlaySchedule askSchedule(Movie movie) {
-        try{
+        try {
             int scheduleId = InputView.inputScheduleId();
-            return movie.checkSchedue(scheduleId -1,books);
-        }catch (IllegalArgumentException e){
+            return movie.checkSchedue(scheduleId - 1, books);
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return askSchedule(movie);
         }
     }
 
-    public static int askPerson(PlaySchedule schedule){
-        try{
+    public static int askPerson(PlaySchedule schedule) {
+        try {
             int person = InputView.inputPerson();
             return schedule.checkCapacity(person);
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return askPerson(schedule);
         }
     }
 
-    public static boolean askAgain(){
-        try{
+    public static boolean askAgain() {
+        try {
             int again = InputView.inputAgain();
             return checkAgain(again);
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return askAgain();
         }
     }
 
-    public static boolean checkAgain(int again){
-        if(again == 1){
+    public static boolean checkAgain(int again) {
+        if (again == 1) {
             OutputView.printBooks(books);
             return false;
         }
         return true;
     }
 
-    public static int askPoint(){
-        try{
+    public static int askPoint() {
+        try {
             int point = InputView.inputPoint();
             return checkPoint(point);
-        }catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return askPoint();
         }
     }
 
-    public static int checkPoint(int point){
-        if(point < 0){
+    public static int checkPoint(int point) {
+        if (point < 0) {
             throw new IllegalArgumentException("포인트는 0 이상입니다.");
         }
         return point;
     }
 
-    public static String askWay(int point){
-        try{
+    public static String askWay(int point) {
+        try {
             int way = InputView.inputWay();
-            return checkWay(way,point);
-        }catch (IllegalArgumentException e){
+            return checkWay(way, point);
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return askWay(point);
         }
     }
 
-    public static int getTotalPrise(){
-        int sum=0;
-        for(ScheduleMovie each : books){
+    public static int getTotalPrise() {
+        int sum = 0;
+        for (ScheduleMovie each : books) {
             sum += each.getTotalPrise();
         }
         return sum;
     }
 
-    public static String checkWay(int way, int point){
-        if(way == 1 || way == 2){
-            return OutputView.printResultCalcue(Discount.valueOf(way).getDiscountRate(),point,getTotalPrise());
+    public static String checkWay(int way, int point) {
+        if (way == 1 || way == 2) {
+            return OutputView.printResultCalcue(Discount.valueOf(way).getDiscountRate(), point, getTotalPrise());
         }
 
         throw new IllegalArgumentException("잘못 입력했습니다.");

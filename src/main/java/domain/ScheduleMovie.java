@@ -21,14 +21,14 @@ public class ScheduleMovie {
     @Override
     public String toString() {
         return String.format(movie.showBooks() + NEW_LINE + schedule.showResult() + NEW_LINE +
-                "예약 인원 " + person+ NEW_LINE);
+                "예약 인원 " + person + NEW_LINE);
     }
 
-    public boolean checkTime(LocalDateTime plusTime){
+    public boolean checkTime(LocalDateTime plusTime) {
         return DateTimeUtils.isOneHourWithinRange(plusTime, schedule.getStarTime());
     }
 
-    public int getTotalPrise(){
+    public int getTotalPrise() {
         return movie.getPrice() * person;
     }
 }
