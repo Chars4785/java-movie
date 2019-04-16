@@ -19,6 +19,7 @@ public class MovieApplication {
             Movie movie = check(movies);
             OutputView.printEachMovie(movie);
             schedule = askSchedule(movie);
+            people = askPerson(schedule);
     }
 
     public static Movie check(List<Movie> movies) {
@@ -49,5 +50,16 @@ public class MovieApplication {
             return askSchedule(movie);
         }
     }
+    
+    public static int askPerson(PlaySchedule schedule){
+        try{
+            int person = InputView.inputPerson();
+            return schedule.checkCapacity(person);
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            return askPerson(schedule);
+        }
+    }
+
 
 }
