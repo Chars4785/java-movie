@@ -18,7 +18,7 @@ public class MovieApplication {
             OutputView.printMovies(movies);
             Movie movie = check(movies);
             OutputView.printEachMovie(movie);
-
+            schedule = askSchedule(movie);
     }
 
     public static Movie check(List<Movie> movies) {
@@ -38,6 +38,16 @@ public class MovieApplication {
             }
         }
         throw new IllegalArgumentException("없는 영화표 입니다.");
+    }
+
+    public static PlaySchedule askSchedule(Movie movie) {
+        try{
+            int scheduleId = InputView.inputScheduleId();
+            return movie.checkSchedue(scheduleId -1);
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            return askSchedule(movie);
+        }
     }
 
 }
