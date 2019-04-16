@@ -47,7 +47,7 @@ public class MovieApplication {
     public static PlaySchedule askSchedule(Movie movie) {
         try{
             int scheduleId = InputView.inputScheduleId();
-            return movie.checkSchedue(scheduleId -1);
+            return movie.checkSchedue(scheduleId -1,books);
         }catch (IllegalArgumentException e){
             System.out.println(e.getMessage());
             return askSchedule(movie);

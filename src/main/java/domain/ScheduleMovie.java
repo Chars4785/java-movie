@@ -1,5 +1,10 @@
 package domain;
 
+
+import utils.DateTimeUtils;
+
+import java.time.LocalDateTime;
+
 public class ScheduleMovie {
     private static final char NEW_LINE = '\n';
 
@@ -19,5 +24,8 @@ public class ScheduleMovie {
                 "예약 인원 " + person+ NEW_LINE);
     }
 
+    public boolean checkTime(LocalDateTime plusTime){
+        return DateTimeUtils.isOneHourWithinRange(plusTime, schedule.getStarTime());
+    }
 
 }
