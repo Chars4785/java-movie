@@ -1,29 +1,24 @@
-import domain.Movie;
-import domain.MovieRepository;
-import domain.PlaySchedule;
+import domain.*;
 import view.InputView;
 import view.OutputView;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class MovieApplication {
-
-    static List<Movie> books = new LinkedList<>();
+    static List<ScheduleMovie> books = new ArrayList<>();
     static List<PlaySchedule> schedules = new LinkedList<>();
 
     static private int people;
-    static private int scheduleId;
+    static private PlaySchedule schedule;
 
     public static void main(String[] args) {
-        do {
             List<Movie> movies = MovieRepository.getMovies();
             OutputView.printMovies(movies);
             Movie movie = check(movies);
             OutputView.printEachMovie(movie);
-            schedules.add(askSchedule(movie));
-        } while (askPurchse());
-        showBooks();
+
     }
 
     public static Movie check(List<Movie> movies) {
@@ -36,43 +31,13 @@ public class MovieApplication {
         }
     }
 
-    public static Movie findMovie(List<Movie> movies, int id) {
-        for (Movie each : movies) {
-            if (each.movieMatchOf(id)) {
-                books.add(each);
-                return each;
+    public static Movie findMovie(List<Movie> movies,int movieId){
+        for(Movie movie: movies){
+            if(movie.movieMatchOf(movieId)){
+                return movie;
             }
         }
-
-        throw new IllegalArgumentException("없는 영화표를 선택하셨습니다.");
+        throw new IllegalArgumentException("없는 영화표 입니다.");
     }
 
-    public static PlaySchedule askSchedule(Movie movie) {
-        try {
-            scheduleId = InputView.inputScheduleId() - 1;
-            people = InputView.inputPerson();
-
-            return movie.checkSchedue(scheduleId, people);
-
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return askSchedule(movie);
-        }
-    }
-
-    public static boolean askPurchse() {
-        return (InputView.inputAgain() != 1);
-    }
-
-    public static void showBooks() {
-        System.out.print("예약 내역");
-
-        for (Movie each : books) {
-            System.out.print(each.showBooks());
-        }
-
-        for (PlaySchedule schedule : schedules) {
-            System.out.print(schedule.showResult());
-        }
-    }
 }

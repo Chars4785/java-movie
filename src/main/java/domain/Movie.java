@@ -33,24 +33,19 @@ public class Movie {
     }
 
     public String showBooks() {
-        return String.format(id + " - " + name + ", " + price + "원" + NEW_LINE);
+        return String.format(id + " - " + name + ", " + price + "원");
     }
 
     public boolean movieMatchOf(int id) {
-        return (this.id == id);
+        return (id == this.id);
     }
 
-    public PlaySchedule checkSchedue(int scheduleId, int people) {
-        if (scheduleId > playSchedules.size()) {
-            throw new IllegalArgumentException("## 시간표가 맞지 않습니다.");
+    public PlaySchedule checkSchedue(int scheduleId) {
+        if(playSchedules.size() < scheduleId){
+            throw new IllegalArgumentException("해당 영화가 없습니다.");
         }
-
-        if (playSchedules.get(scheduleId).checkCapacity(people)) {
-            throw new IllegalArgumentException("## 매진 입니다.");
-        }
-
-
         return playSchedules.get(scheduleId);
+
     }
 
 }
