@@ -23,6 +23,7 @@ public class MovieApplication {
             people = askPerson(schedule);
             books.add(new ScheduleMovie(movie,schedule,people));
         } while (askAgain());
+        System.out.print(askWay(askPoint()));
     }
 
     public static Movie check(List<Movie> movies) {
@@ -82,7 +83,47 @@ public class MovieApplication {
         return true;
     }
 
+    public static int askPoint(){
+        try{
+            int point = InputView.inputPoint();
+            return checkPoint(point);
+        }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            return askPoint();
+        }
+    }
 
+    public static int checkPoint(int point){
+        if(point < 0){
+            throw new IllegalArgumentException("포인트는 0 이상입니다.");
+        }
+        return point;
+    }
 
+    public static String askWay(int point){
+        try{
+            int way = InputView.inputWay();
+            return checkWay(way,point);
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            return askWay(point);
+        }
+    }
+
+    public static int getTotalPrise(){
+        int sum=0;
+        for(ScheduleMovie each : books){
+            sum += each.getTotalPrise();
+        }
+        return sum;
+    }
+
+    public static String checkWay(int way, int point){
+        if(way == 1 || way == 2){
+            return OutputView.printResultCalcue(Discount.valueOf(way).getDiscountRate(),point,getTotalPrise());
+        }
+
+        throw new IllegalArgumentException("잘못 입력했습니다.");
+    }
 
 }

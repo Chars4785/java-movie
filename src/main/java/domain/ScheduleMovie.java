@@ -28,4 +28,7 @@ public class ScheduleMovie {
         return DateTimeUtils.isOneHourWithinRange(plusTime, schedule.getStarTime());
     }
 
+    public int getTotalPrise(){
+        return movie.getPrice() * person;
+    }
 }

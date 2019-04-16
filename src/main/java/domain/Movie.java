@@ -55,4 +55,8 @@ public class Movie {
 
     }
 
+    public int getPrice(){
+        return price;
+    }
+
 }
