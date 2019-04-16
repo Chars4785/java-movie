@@ -14,12 +14,15 @@ public class MovieApplication {
     static private PlaySchedule schedule;
 
     public static void main(String[] args) {
+        do{
             List<Movie> movies = MovieRepository.getMovies();
             OutputView.printMovies(movies);
             Movie movie = check(movies);
             OutputView.printEachMovie(movie);
             schedule = askSchedule(movie);
             people = askPerson(schedule);
+            books.add(new ScheduleMovie(movie,schedule,people));
+        } while (askAgain());
     }
 
     public static Movie check(List<Movie> movies) {
@@ -50,7 +53,7 @@ public class MovieApplication {
             return askSchedule(movie);
         }
     }
-    
+
     public static int askPerson(PlaySchedule schedule){
         try{
             int person = InputView.inputPerson();
@@ -60,6 +63,26 @@ public class MovieApplication {
             return askPerson(schedule);
         }
     }
+
+    public static boolean askAgain(){
+        try{
+            int again = InputView.inputAgain();
+            return checkAgain(again);
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            return askAgain();
+        }
+    }
+
+    public static boolean checkAgain(int again){
+        if(again == 1){
+            OutputView.printBooks(books);
+            return false;
+        }
+        return true;
+    }
+
+
 
 
 }
