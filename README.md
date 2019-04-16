@@ -49,5 +49,6 @@
         - InputView
         - OutputView
     - MovieApplication
+    - Discount
 
 ## 3. 메쏘드
