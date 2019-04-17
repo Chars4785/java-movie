@@ -17,4 +17,21 @@ public class PlaySchedule {
     public String toString() {
         return "시작시간: " + format(startDateTime) + " 예약가능인원: " + capacity + "\n";
     }
+
+    public String showResult() {
+        return "시작시간: " + format(startDateTime);
+    }
+
+    public int checkCapacity(int people) {
+        if ((capacity - people) < 0) {
+            throw new IllegalArgumentException("## 매진입니다.");
+        }
+        capacity = capacity - people;
+        return people;
+
+    }
+
+    public LocalDateTime getStarTime() {
+        return startDateTime;
+    }
 }
