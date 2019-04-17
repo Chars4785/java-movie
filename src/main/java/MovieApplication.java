@@ -3,13 +3,14 @@ import view.InputView;
 import view.OutputView;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class MovieApplication {
+    static final int CARD =1;
+    static final int CASH =2;
+    static final int POINT_LIMIT =0;
+    static final int AGAIN_TRUE =1;
     static List<ScheduleMovie> books = new ArrayList<>();
-    static List<PlaySchedule> schedules = new LinkedList<>();
-
     static private int people;
     static private PlaySchedule schedule;
 
@@ -76,7 +77,7 @@ public class MovieApplication {
     }
 
     public static boolean checkAgain(int again) {
-        if (again == 1) {
+        if (again == AGAIN_TRUE) {
             OutputView.printBooks(books);
             return false;
         }
@@ -94,7 +95,7 @@ public class MovieApplication {
     }
 
     public static int checkPoint(int point) {
-        if (point < 0) {
+        if (point < POINT_LIMIT) {
             throw new IllegalArgumentException("포인트는 0 이상입니다.");
         }
         return point;
@@ -119,7 +120,7 @@ public class MovieApplication {
     }
 
     public static String checkWay(int way, int point) {
-        if (way == 1 || way == 2) {
+        if (way == CARD || way == CASH) {
             return OutputView.printResultCalcue(Discount.valueOf(way).getDiscountRate(), point, getTotalPrise());
         }
 
